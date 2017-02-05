@@ -34,19 +34,10 @@ POTUS = api.get_user(cmdArgs[1])  #POTUS is now a user object for POTUS
 print "User being examined:", POTUS.screen_name
 print "Number of followers:", POTUS.followers_count
 #print list of people whom POTUS follows
-print "List of people whom %s follows:" % POTUS.screen_name
+print "20 accounts whom %s follows:" % POTUS.screen_name
 for friend in POTUS.friends():
 	print "    ", friend.screen_name
 
-#Print all the tweets of POTUS
-numOfTweets = 0
-for status in tweepy.Cursor(api.user_timeline, id=cmdArgs[1]).items():
-	#process status here
-	# print(status.text)
-	# print("\n------\n")
-	numOfTweets += 1
-# print "Total number of %s tweets:" % POTUS.screen_name
-# print(numOfTweets)
 
 POTUSsentiment = []
 POTUSsentimentMax = -1
@@ -59,6 +50,8 @@ subjectivityMin = 1
 subjectivityMax = -1
 subjectivityMaxText = ""
 subjectivityMinText = ""
+
+print "Please be patient.  Users with many tweets will take longer during this step...\n"
 
 count = 0
 for status in tweepy.Cursor(api.user_timeline, id=cmdArgs[1]).items():
@@ -84,7 +77,7 @@ for status in tweepy.Cursor(api.user_timeline, id=cmdArgs[1]).items():
 		subjectivityMin = analysis.subjectivity
 		subjectivityMinText = status.text
 print "Total number of %s tweets:" % POTUS.screen_name
-print count+1
+print(count+1)
 
 #TODO average sentiments.
 anotherCount = 0
@@ -95,7 +88,7 @@ for sentiments in POTUSsentiment:
 	totalSubjectivity += POTUSsubjectivity[anotherCount]
 	anotherCount += 1
 
-print "average sentiment per tweet =", totalSentiment/len(POTUSsentiment)
+print "Average sentiment per tweet =", totalSentiment/len(POTUSsentiment)
 print "Max sentiment:", POTUSsentimentMax
 print "    Most positive tweet:", sentimentMaxText
 #TODO print the tweet with the highest sentiment.

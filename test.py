@@ -1,6 +1,7 @@
-myList = [10]
+myList = []
 
-for word in myList:
- 	print(word)
+for word in range(10):
+ 	myList.append(503)
 
 print (myList)
+print (len(myList))

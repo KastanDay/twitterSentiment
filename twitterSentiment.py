@@ -18,6 +18,6 @@ for tweet in public_tweets:
 	print(tweet.text)
 	analysis = TextBlob(tweet.text)
 	print("-------")
-	print(analysis.sentiment)
+	print(analysis.subjectivity)
 	print("-------")
 	print("\n")
